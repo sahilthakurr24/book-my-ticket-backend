@@ -1,4 +1,4 @@
-# BMS Mini Backend API
+# Book My Ticket Backend API
 
 Express + Drizzle backend for a minimal movie booking system. This README explains how to run the API, how authentication works, and how to use every available endpoint.
 
