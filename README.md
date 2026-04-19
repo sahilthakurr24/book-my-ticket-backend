@@ -143,7 +143,8 @@ Example response:
     "email": "rahul@example.com",
     "avatar": "https://ik.imagekit.io/your_imagekit_id/user-avatars/profile.png",
     "role": "user",
-    "accessToken": "jwt-token"
+    "accessToken": "jwt-access-token",
+    "refreshToken": "jwt-refresh-token"
   }
 }
 ```
@@ -162,6 +163,26 @@ Body:
 ```
 
 Response includes user details and a fresh access token.
+
+Example response:
+
+```json
+{
+  "success": true,
+  "message": "Signed in successfully",
+  "data": {
+    "user": {
+      "id": "user-uuid",
+      "name": "Rahul Kumar",
+      "email": "rahul@example.com",
+      "avatar": null,
+      "role": "user"
+    },
+    "accessToken": "jwt-access-token",
+    "refreshToken": "jwt-refresh-token"
+  }
+}
+```
 
 ### 3. Refresh Access Token
 

@@ -69,6 +69,7 @@ export async function signin(body) {
       role: existingUser.role,
     },
     accessToken,
+    refreshToken,
   };
 }
 
@@ -102,7 +103,7 @@ export async function signup({ body, file }) {
   try {
     uploadResponse = await uploadImageToImageKit(validatedData.avatar, "/user-avatars");
 
-    const createdUser = await db.transaction(async (tx) => {
+    const { createdUser, refreshToken } = await db.transaction(async (tx) => {
       const user = await tx
         .insert(users)
         .values({
@@ -121,7 +122,10 @@ export async function signup({ body, file }) {
         .set({ refreshToken })
         .where(eq(users.id, insertedUser.id));
 
-      return insertedUser;
+      return {
+        createdUser: insertedUser,
+        refreshToken,
+      };
     });
 
     //creating token
@@ -134,6 +138,7 @@ export async function signup({ body, file }) {
       avatar: createdUser.avatar,
       role: createdUser.role,
       accessToken,
+      refreshToken,
     };
   } catch (error) {
     if (uploadResponse?.fileId) {
