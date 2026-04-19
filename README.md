@@ -143,11 +143,12 @@ Example response:
     "email": "rahul@example.com",
     "avatar": "https://ik.imagekit.io/your_imagekit_id/user-avatars/profile.png",
     "role": "user",
-    "accessToken": "jwt-access-token",
-    "refreshToken": "jwt-refresh-token"
+    "accessToken": "jwt-access-token"
   }
 }
 ```
+
+The refresh token is set in an `HttpOnly` cookie.
 
 ### 2. Sign In
 
@@ -178,22 +179,24 @@ Example response:
       "avatar": null,
       "role": "user"
     },
-    "accessToken": "jwt-access-token",
-    "refreshToken": "jwt-refresh-token"
+    "accessToken": "jwt-access-token"
   }
 }
 ```
+
+The refresh token is set in an `HttpOnly` cookie.
 
 ### 3. Refresh Access Token
 
 `POST /auth/refresh-token`
 
-Body:
+Body is not required. The endpoint reads the refresh token from the `HttpOnly` cookie.
 
-```json
-{
-  "refreshToken": "your-refresh-token"
-}
+Example:
+
+```bash
+curl -X POST http://localhost:3000/auth/refresh-token \
+  --cookie "refreshToken=your-refresh-token"
 ```
 
 ### 4. Logout

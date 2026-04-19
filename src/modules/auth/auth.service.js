@@ -149,8 +149,7 @@ export async function signup({ body, file }) {
   }
 }
 
-export async function refreshToken(body) {
-  const { refreshToken: token } = body;
+export async function refreshToken(token) {
   if (!token) {
     throw ApiError.badRequest("Refresh token is required");
   }

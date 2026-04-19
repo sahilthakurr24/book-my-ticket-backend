@@ -8,12 +8,13 @@ import { errorHandler } from "./common/middleware/error-handler.js";
 import ApiResponse from "./common/utils/api-response.js";
 import { upload } from "./common/middleware/multer.js";
 import { uploadImageToImageKit } from "./common/services/imagekit.service.js";
+import cookieparser from "cookie-parser";
 
 export const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
+app.use(cookieparser());
 app.use("/auth", authRouter);
 app.use("/movies", moviesRouter);
 // GET /movies/:movieId/shows — listing shows for a movie
